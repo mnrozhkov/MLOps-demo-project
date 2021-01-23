@@ -1,0 +1,23 @@
+## Project
+data/*
+models/*
+reports/*
+notebooks/*
+
+## Configs
+.env
+config/*.json
+
+## Virtual environments
+venv/*
+
+# Python
+__pycache__
+
+## IDEs
+.idea
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints
+
