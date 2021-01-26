@@ -1,7 +1,7 @@
 predict-device-change
 ==============================
 
-Predicting change of a user device during a month
+Predicting change of a user device using during a month.
 
 Project Organization (Cookiecutter format)
 ------------
