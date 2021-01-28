@@ -1,0 +1,35 @@
+base:
+  project_dir: . # '.' means current dir. Better to move to .env in future
+  random_state: 42
+  log_level: DEBUG
+
+data_load:
+  target: data/raw/target.feather
+  dataset: data/raw/user_features.feather
+  target_processed: data/processed/target.feather
+  dataset_processed: data/processed/user_features.feather
+
+featurize:
+  features_path: data/processed/features.feather
+  categories: ['feature_17', 'feature_21', 'feature_11', 'feature_16', 'feature_22']
+
+data_split:
+  split_oos: True
+  test_size: 1  # count of latest months
+  train_index_path: data/processed/train_index.csv
+  test_index_path: data/processed/test_index.csv
+
+train:
+  catboost_params:
+    iterations: 20
+    thread_count: 20
+    has_time: true
+    allow_writing_files: false
+  top_K_coef: 0.05
+  model_path: models/model.joblib
+  train_metrics: reports/train_metrics.json
+  train_metrics_path: reports/train_metrics.json
+  train_metrics_png: reports/train_metrics.png
+  train_plots_path: reports/train_plots.csv
+  raw_metrics_path: reports/raw_metrics.csv
+  encoder_path: models/encoder.pickle

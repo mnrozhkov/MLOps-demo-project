@@ -1,4 +1,4 @@
-predict-device-change
+Reproducible and automated DS project
 ==============================
 
 Predicting change of a user device using during a month.
