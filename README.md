@@ -2,6 +2,13 @@ ML Ops demo
 ==============================
 Demonstrate introducing reproducibility, pipelines automation and ML Ops in data science projects using DVC, MLflow, and Airflow.
 
+Goals:
+
+- Improve ML experimenting and development process
+- Introduce engineering practices
+- Improve team collaboration
+- Integrate tools for production-level ML projects
+
 ***
 
 ## 1. From Jupyter to CI/CD
