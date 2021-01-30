@@ -13,13 +13,13 @@ Transformation from a prototype in Jupyter to a reliable and reproducible ML sol
 
     Step 2. Reorganize the code from notebooks into .py scripts that compose pipeline stages
 
-    Step 3. Automate the pipelines using [DVC](http://dvc.org)
+    Step 3. Automate the pipelines using DVC
 
     Step 4. Introduce tests
 
-    Step 5. Manage experiments and track metrics with [DVC](https://dvc.org) and [MLflow](https://mlflow.org)
+    Step 5. Manage experiments and track metrics with DVC and MLflow
 
-    Step 6. Automate pipelines with [Airflow](https://airflow.apache.org)
+    Step 6. Automate pipelines with Airflow
 
     Step 7. Setup CI/CD and ML Ops
 
