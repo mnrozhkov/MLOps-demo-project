@@ -1,0 +1,11 @@
+stages:
+  load_data_stage:
+    cmd: python -m src.pipelines.load_data --config=config/params.yaml
+    deps:
+    - src/data/load.py
+    - src/data/process.py
+    - src/utils/logging.py
+    params:
+    - config/params.yaml:
+      - base
+      - data_load
