@@ -9,3 +9,28 @@ stages:
     - config/params.yaml:
       - base
       - data_load
+  featurize_stage:
+    cmd: python -m src.pipelines.featurize --config=config/params.yaml
+    deps:
+    - src/data/load.py
+    - src/data/process.py
+    - src/utils/logging.py
+    params:
+    - config/params.yaml:
+      - base
+      - featurize
+  train_stage:
+    cmd: python -m src.pipelines.train --config=config/params.yaml
+    deps:
+    - src/evaluate/metrics.py
+    - src/train/train.py
+    - src/utils/logging.py
+    params:
+    - config/params.yaml:
+      - base
+      - featurize.features_path
+      - train
+    outs:
+    - models/model.joblib
+    metrics:
+    - reports/raw_metrics.csv

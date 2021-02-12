@@ -21,7 +21,7 @@ data_split:
 
 train:
   catboost_params:
-    iterations: 20
+    iterations: 21
     thread_count: 20
     has_time: true
     allow_writing_files: false
