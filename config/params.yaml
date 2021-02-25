@@ -2,6 +2,7 @@ base:
   project_dir: . # '.' means current dir. Better to move to .env in future
   random_state: 42
   log_level: DEBUG
+  exp_name: Test_experiment_log_metrics_check
 
 data_load:
   target: data/raw/target.feather
@@ -20,8 +21,9 @@ data_split:
   test_index_path: data/processed/test_index.csv
 
 train:
+  estimator: catboost
   catboost_params:
-    iterations: 20
+    iterations: 21
     thread_count: 20
     has_time: true
     allow_writing_files: false
@@ -33,3 +35,6 @@ train:
   train_plots_path: reports/train_plots.csv
   raw_metrics_path: reports/raw_metrics.csv
   encoder_path: models/encoder.pickle
+
+log_metrics:
+    mlflow_report_path: reports/mlflow_report.md

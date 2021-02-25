@@ -1,0 +1,92 @@
+load_data_stage:
+  cmd: python -m src.pipelines.load_data --config=config/params.yaml
+  deps:
+  - path: src/data/load.py
+    md5: 0a5f96acb043c689f0ed53ec95c89c91
+    size: 435
+  - path: src/data/process.py
+    md5: 50961f7de0d85f0141cff8623921318a
+    size: 908
+  - path: src/utils/logging.py
+    md5: 65c8fc45ee7ec9baf85c1aa9050b27ed
+    size: 1059
+  params:
+    config/params.yaml:
+      base:
+        project_dir: .
+        random_state: 42
+        log_level: DEBUG
+      data_load:
+        target: data/raw/target.feather
+        dataset: data/raw/user_features.feather
+        target_processed: data/processed/target.feather
+        dataset_processed: data/processed/user_features.feather
+featurize_stage:
+  cmd: python -m src.pipelines.featurize --config=config/params.yaml
+  deps:
+  - path: src/data/load.py
+    md5: 0a5f96acb043c689f0ed53ec95c89c91
+    size: 435
+  - path: src/data/process.py
+    md5: 50961f7de0d85f0141cff8623921318a
+    size: 908
+  - path: src/utils/logging.py
+    md5: 65c8fc45ee7ec9baf85c1aa9050b27ed
+    size: 1059
+  params:
+    config/params.yaml:
+      base:
+        project_dir: .
+        random_state: 42
+        log_level: DEBUG
+      featurize:
+        features_path: data/processed/features.feather
+        categories:
+        - feature_17
+        - feature_21
+        - feature_11
+        - feature_16
+        - feature_22
+train_stage:
+  cmd: python -m src.pipelines.train --config=config/params.yaml
+  deps:
+  - path: src/evaluate/metrics.py
+    md5: ecffe3e3bf09221a0705262caec223d1
+    size: 3999
+  - path: src/train/train.py
+    md5: bb22e2e541db94bb1fe279fad01c61e0
+    size: 2292
+  - path: src/utils/logging.py
+    md5: 65c8fc45ee7ec9baf85c1aa9050b27ed
+    size: 1059
+  params:
+    config/params.yaml:
+      base:
+        project_dir: .
+        random_state: 42
+        log_level: DEBUG
+      featurize.features_path: data/processed/features.feather
+      train:
+        catboost_params:
+          iterations: 21
+          thread_count: 20
+          has_time: true
+          allow_writing_files: false
+        top_K_coef: 0.05
+        model_path: models/model.joblib
+        train_metrics: reports/train_metrics.json
+        train_metrics_path: reports/train_metrics.json
+        train_metrics_png: reports/train_metrics.png
+        train_plots_path: reports/train_plots.csv
+        raw_metrics_path: reports/raw_metrics.csv
+        encoder_path: models/encoder.pickle
+  outs:
+  - path: models/model.joblib
+    md5: a9eaa9bb592d2e99c584cee710bc8033
+    size: 35750
+  - path: reports/raw_metrics.csv
+    md5: 87e844a3320ddcbd3738749ab830462a
+    size: 253
+  - path: reports/train_metrics.json
+    md5: 1abd0de117816c679e566398660a914e
+    size: 449
