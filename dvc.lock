@@ -82,8 +82,11 @@ train_stage:
         encoder_path: models/encoder.pickle
   outs:
   - path: models/model.joblib
-    md5: 8c030dc709a6184dd473b665457a6771
+    md5: a9eaa9bb592d2e99c584cee710bc8033
     size: 35750
   - path: reports/raw_metrics.csv
     md5: 87e844a3320ddcbd3738749ab830462a
     size: 253
+  - path: reports/train_metrics.json
+    md5: 1abd0de117816c679e566398660a914e
+    size: 449

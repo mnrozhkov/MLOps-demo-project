@@ -34,3 +34,4 @@ stages:
     - models/model.joblib
     metrics:
     - reports/raw_metrics.csv
+    - reports/train_metrics.json

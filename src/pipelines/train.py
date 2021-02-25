@@ -28,7 +28,7 @@ def train(config_path: Text) -> None:
     """
     # Import configs:
     # -------------------------------------------
-    # config = yaml.safe_load(xopen(config_path))
+    # config = yaml.safe_load(open(config_path))
     config = EnvYAML(config_path)
     print(config.get('base'))
 

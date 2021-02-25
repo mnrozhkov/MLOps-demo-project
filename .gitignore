@@ -96,3 +96,7 @@ target/
 # Hypothesis PB tests
 # ----------------
 .hypothesis/
+
+# MLflow
+# ------------
+mlruns/
