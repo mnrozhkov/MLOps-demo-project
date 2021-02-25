@@ -35,3 +35,17 @@ stages:
     metrics:
     - reports/raw_metrics.csv
     - reports/train_metrics.json
+  log_metrics:
+    cmd: python -m src.pipelines.log_metrics --config=config/params.yaml
+    deps:
+    - data/processed/features.feather
+    - models/model.joblib
+    - reports/raw_metrics.csv
+    - reports/train_metrics.json
+    params:
+    - config/params.yaml:
+      - log_metrics
+      - train
+    outs:
+    - reports/mlflow_report.md:
+        cache: false

@@ -16,6 +16,7 @@ load_data_stage:
         project_dir: .
         random_state: 42
         log_level: DEBUG
+        exp_name: Test_experiment_log_metrics_check
       data_load:
         target: data/raw/target.feather
         dataset: data/raw/user_features.feather
@@ -39,6 +40,7 @@ featurize_stage:
         project_dir: .
         random_state: 42
         log_level: DEBUG
+        exp_name: Test_experiment_log_metrics_check
       featurize:
         features_path: data/processed/features.feather
         categories:
@@ -65,12 +67,16 @@ train_stage:
         project_dir: .
         random_state: 42
         log_level: DEBUG
+        exp_name: Test_experiment_log_metrics_check
       featurize.features_path: data/processed/features.feather
       train:
+        estimator: catboost
         catboost_params:
-          iterations: 21
-          thread_count: 20
+          iterations: 10
+          thread_count: 50
           has_time: true
+          depth: 6
+          learning_rate: 0.15
           allow_writing_files: false
         top_K_coef: 0.05
         model_path: models/model.joblib
@@ -82,11 +88,51 @@ train_stage:
         encoder_path: models/encoder.pickle
   outs:
   - path: models/model.joblib
-    md5: a9eaa9bb592d2e99c584cee710bc8033
-    size: 35750
+    md5: b889e335f1b82d91f943454437be2bf1
+    size: 19625
   - path: reports/raw_metrics.csv
-    md5: 87e844a3320ddcbd3738749ab830462a
-    size: 253
+    md5: de8a2c381ea65b541a0af957d8b8f6a6
+    size: 250
   - path: reports/train_metrics.json
-    md5: 1abd0de117816c679e566398660a914e
-    size: 449
+    md5: d99cfecdf901ca22783b588574a8d4cf
+    size: 447
+log_metrics:
+  cmd: python -m src.pipelines.log_metrics --config=config/params.yaml
+  deps:
+  - path: data/processed/features.feather
+    md5: 60252c4d3b15ae011aa1ab373dd13fa1
+    size: 132405874
+  - path: models/model.joblib
+    md5: b889e335f1b82d91f943454437be2bf1
+    size: 19625
+  - path: reports/raw_metrics.csv
+    md5: de8a2c381ea65b541a0af957d8b8f6a6
+    size: 250
+  - path: reports/train_metrics.json
+    md5: d99cfecdf901ca22783b588574a8d4cf
+    size: 447
+  params:
+    config/params.yaml:
+      log_metrics:
+        mlflow_report_path: reports/mlflow_report.md
+      train:
+        estimator: catboost
+        catboost_params:
+          iterations: 10
+          thread_count: 50
+          has_time: true
+          depth: 6
+          learning_rate: 0.15
+          allow_writing_files: false
+        top_K_coef: 0.05
+        model_path: models/model.joblib
+        train_metrics: reports/train_metrics.json
+        train_metrics_path: reports/train_metrics.json
+        train_metrics_png: reports/train_metrics.png
+        train_plots_path: reports/train_plots.csv
+        raw_metrics_path: reports/raw_metrics.csv
+        encoder_path: models/encoder.pickle
+  outs:
+  - path: reports/mlflow_report.md
+    md5: afcd7402a55a0462860f0fa798df2e00
+    size: 112
