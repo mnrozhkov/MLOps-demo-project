@@ -23,9 +23,11 @@ data_split:
 train:
   estimator: catboost
   catboost_params:
-    iterations: 21
-    thread_count: 20
+    iterations: 10
+    thread_count: 50
     has_time: true
+    depth: 6
+    learning_rate: 0.15
     allow_writing_files: false
   top_K_coef: 0.05
   model_path: models/model.joblib
