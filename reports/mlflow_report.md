@@ -1,6 +1,6 @@
-Experiment id: 3
+Experiment id: 4
 
-Experiment name: Test_experiment_log_metrics_check
+Experiment name: Experiment 1
 
-Run id: f5a3393ee58544a0aef78787a8e41fa9
+Run id: dca173dc365e4ab5b4bb7decc0e83bab
 

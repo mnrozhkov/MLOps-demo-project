@@ -2,7 +2,7 @@ base:
   project_dir: . # '.' means current dir. Better to move to .env in future
   random_state: 42
   log_level: DEBUG
-  exp_name: Test_experiment_log_metrics_check
+  exp_name: Experiment 1
 
 data_load:
   target: data/raw/target.feather
@@ -23,9 +23,11 @@ data_split:
 train:
   estimator: catboost
   catboost_params:
-    iterations: 21
-    thread_count: 20
+    iterations: 30
+    thread_count: 50
     has_time: true
+    depth: 6
+    learning_rate: 0.15
     allow_writing_files: false
   top_K_coef: 0.05
   model_path: models/model.joblib
